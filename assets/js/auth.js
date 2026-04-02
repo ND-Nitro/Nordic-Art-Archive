@@ -34,6 +34,12 @@ if (loginForm) {
   const passwordError = document.querySelector("#passwordError");
   const formMessage = document.querySelector("#formMessage");
 
+  function setMessage(message) {
+    if (formMessage) {
+      formMessage.textContent = message;
+    }
+  }
+
   function clearLoginErrors() {
     emailError.textContent = "";
     passwordError.textContent = "";
