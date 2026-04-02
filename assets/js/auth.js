@@ -102,20 +102,23 @@ if (registerForm) {
   const nameInput = document.querySelector("#name");
   const emailInput = document.querySelector("#email");
   const passwordInput = document.querySelector("#password");
+  const passwordConfirmInput = document.querySelector("#passwordConfirm");
 
   const nameError = document.querySelector("#nameError");
   const emailError = document.querySelector("#emailError");
   const passwordError = document.querySelector("#passwordError");
+  const passwordConfirmError = document.querySelector("#passwordConfirmError");
   const formMessage = document.querySelector("#formMessage");
 
   function clearRegisterErrors() {
     nameError.textContent = "";
     emailError.textContent = "";
     passwordError.textContent = "";
+    passwordConfirmError.textContent = "";
     formMessage.textContent = "";
   }
 
-  function validateRegisterForm(name, email, password) {
+  function validateRegisterForm(name, email, password, passwordConfirm) {
     let isValid = true;
 
     if (!name.trim()) {
@@ -138,6 +141,11 @@ if (registerForm) {
       isValid = false;
     }
 
+    if (password !== passwordConfirm) {
+      passwordConfirmError.textContent = "passwords do not match.";
+      isValid = false;
+    }
+
     return isValid;
   }
 
@@ -148,8 +156,9 @@ if (registerForm) {
     const name = nameInput.value.trim();
     const email = emailInput.value.trim();
     const password = passwordInput.value.trim();
+    const passwordConfirm = passwordConfirmInput.value.trim();
 
-    if (!validateRegisterForm(name, email, password)) {
+    if (!validateRegisterForm(name, email, password, passwordConfirm)) {
       return;
     }
 
