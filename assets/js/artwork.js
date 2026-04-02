@@ -1,10 +1,10 @@
 const ownerActions = document.querySelectorAll(".owner-actions");
 const token = localStorage.getItem("accessToken");
 
-if (ownerActions) {
+ownerActions.forEach((action) => {
   if (token) {
-    ownerActions.classList.remove("hidden");
+    action.style.display = "flex";
   } else {
-    ownerActions.classList.add("hidden");
+    action.style.display = "none";
   }
-}
+});
