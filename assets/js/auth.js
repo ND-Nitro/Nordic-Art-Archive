@@ -1,4 +1,4 @@
-// here is the api collector ,, that will  fetch / get the corrwect api i need for login and register 
+// here is the api collector ,, that will  fetch / get the corrwect api i need for login and register
 const loginForm = document.querySelector("#login-form");
 const registerForm = document.querySelector("#register-form");
 
@@ -26,142 +26,141 @@ async function sendRequest(url, bodyData) {
 // this is the login function for login.html
 
 if (loginForm) {
-    const emailInput = document.querySelector("#email");
-    const passwordInput = document.querySelector("#password");
-    const emailError = document.querySelector("#emailError");
-    const passwordError = document.querySelector("#passwordError");
-    const formMessage = document.querySelector("#formMessage");
+  const emailInput = document.querySelector("#email");
+  const passwordInput = document.querySelector("#password");
+  const emailError = document.querySelector("#emailError");
+  const passwordError = document.querySelector("#passwordError");
+  const formMessage = document.querySelector("#formMessage");
 
-    function clearLoginErrors() {
-        emailError.textContent = "";
-        passwordError.textContent = "";
-        formMessage.textContent = "";
+  function clearLoginErrors() {
+    emailError.textContent = "";
+    passwordError.textContent = "";
+    formMessage.textContent = "";
+  }
+
+  function validateLoginForm(email, password) {
+    let isValid = true;
+
+    if (!email.trim()) {
+      emailError.textContent = "Email is required.";
+      isValid = false;
     }
 
-    function validateLoginForm(email, password) {
-        let isValid = true;
-
-        if (!email.trim()) {
-            passwordError.textContent = "Email is required.";
-            isValid = false;
-        } 
-
-        if (!password.trim()) {
-            passwordError.textContent = "Password is required.";
-            isValid = false;
-        }
-
-        return isValid;
+    if (!password.trim()) {
+      passwordError.textContent = "Password is required.";
+      isValid = false;
     }
 
-    loginForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        clearLoginErrors();
+    return isValid;
+  }
 
-        const email = emailInput.ariaValueMax.trim();
-        const password = passwordInput.value.trim();
+  loginForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    clearLoginErrors();
 
-        if (!validateLoginForm(email, password)) {
-            return;
-        }
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
 
-        try {
-            formMessage.textContent = "Logging in...";
+    if (!validateLoginForm(email, password)) {
+      return;
+    }
 
-            const result = await sendRequest(API_LOGIN_URL, {
-                email,
-                password,
-            });
+    try {
+      formMessage.textContent = "Logging in...";
 
-            localStorage.setItem("accessToken", result.data.accessToken);
-            localStorage.setItem("userName", result.data.name);
-            localStorage.setItem("userEmail", result.data.email);
+      const result = await sendRequest(API_LOGIN_URL, {
+        email,
+        password,
+      });
 
-            formMessage.textContent = "Login succsessful.";
+      localStorage.setItem("accessToken", result.data.accessToken);
+      localStorage.setItem("userName", result.data.name);
+      localStorage.setItem("userEmail", result.data.email);
 
-            setTimeout(() => {
-                windiow.location.href = "../index.html";
-            }, 1000);
-        } catch (error) {
-            formMessage.textContent = error.message;
-        }
-    });
+      formMessage.textContent = "Login succsessful.";
+
+      setTimeout(() => {
+        window.location.href = "../index.html";
+      }, 1000);
+    } catch (error) {
+      formMessage.textContent = error.message;
+    }
+  });
 }
 
 // this is the register function for register.html
 
 if (registerForm) {
-    const nameInput = document.querySelector("#name");
-    const emailInput = document.querySelector("#email");
-    const passwordInput = document.querySelector("#password");
+  const nameInput = document.querySelector("#name");
+  const emailInput = document.querySelector("#email");
+  const passwordInput = document.querySelector("#password");
 
-    const nameError = document.querySelector("#nameError");
-    const emailError = document.querySelector("#emailError");
-    const passwordError = document.querySelector("#passwordError");
-    const formMessage = document.querySelector("#formMessage");
+  const nameError = document.querySelector("#nameError");
+  const emailError = document.querySelector("#emailError");
+  const passwordError = document.querySelector("#passwordError");
+  const formMessage = document.querySelector("#formMessage");
 
-    function clearRegisterErrors() {
-        nameError.textContent = "";
-        emailError.textContent = "";
-        passwordError.textContent = "";
-        formMessage.textContent = "";
+  function clearRegisterErrors() {
+    nameError.textContent = "";
+    emailError.textContent = "";
+    passwordError.textContent = "";
+    formMessage.textContent = "";
+  }
+
+  function validateRegisterForm(name, email, password) {
+    let isValid = true;
+
+    if (!name.trim()) {
+      nameError.textContent = "Name is Required.";
+      isValid = false;
     }
 
-    function validateRegisterForm(name, email, password) {
-        let isValid = true;
-
-        if (!name.trim()) {
-            nameError.textContent = "Name is required.";
-            isValid = false;
-        }
-
-        if (!email.trim()) {
-            emailError.textContent = "Email is required.";
-            isValid = false;
-        }
-
-        if (!password.trim()) {
-            passwordError.textContent = "Password is Requierd.!";
-            isValid = false;
-        }
-
-        if password.trim().length < 8 {
-            passwordError.textContent = "Password must be at least 8 characters.";
-            isValid = false;
-        }
-
-        return isValid; 
+    if (!email.trim()) {
+      emailError.textContent = "Email is Required.";
+      isValid = false;
     }
 
-     registerForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        clearRegisterErrors();
+    if (!password.trim()) {
+      passwordError.textContent = "Password is Requierd.!";
+      isValid = false;
+    }
 
-        const name = nameInput.value.trim();
-        const email = emailInput.value.trim();
-        const password = passwordInput.value.trim();
+    if (password.trim().length < 8) {
+      passwordError.textContent = "Password must be at least 8 characters.";
+      isValid = false;
+    }
 
-        if (!validateRegisterForm(name, email, password)) {
-            return;
-        }
+    return isValid;
+  }
 
-        try {
-            formMessage.textContent = "Registering...";
+  registerForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    clearRegisterErrors();
 
-            await sendRequest(API_REGISTER_URL, {
-                name,
-                email,
-                password,
-            });
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
 
-            formMessage.textContent = "Registration successful.";
+    if (!validateRegisterForm(name, email, password)) {
+      return;
+    }
 
-            setTimeout(() => {
-                window.location.href = "./login.html";
-            }, 1000);
-        } catch (error) {
-            formMessage.textContent = error.message;
-        }
-    });
+    try {
+      formMessage.textContent = "Registering...";
+
+      await sendRequest(API_REGISTER_URL, {
+        name,
+        email,
+        password,
+      });
+
+      formMessage.textContent = "Registration successful.";
+
+      setTimeout(() => {
+        window.location.href = "./login.html";
+      }, 1000);
+    } catch (error) {
+      formMessage.textContent = error.message;
+    }
+  });
 }
-
