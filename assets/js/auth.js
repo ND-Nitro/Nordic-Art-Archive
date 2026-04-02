@@ -1,4 +1,3 @@
-// here is the api collector ,, that will  fetch / get the corrwect api i need for login and register
 import { API_BASE_URL } from "./api/config.js";
 
 const loginForm = document.querySelector("#loginform");
@@ -11,7 +10,7 @@ async function sendRequest(url, bodyData) {
   const response = await fetch(url, {
     method: "POST",
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(bodyData),
   });
@@ -25,7 +24,23 @@ async function sendRequest(url, bodyData) {
   return result;
 }
 
-// this is the login function for login.html
+function setFieldError(element, message) {
+  if (element) {
+    element.textContent = message;
+  }
+}
+
+function setFormMessage(element, message) {
+  if (element) {
+    element.textContent = message;
+  }
+}
+
+function isValidEmail(email) {
+  return email.includes("@");
+}
+
+// Loginform for login.html
 
 if (loginForm) {
   const emailInput = document.querySelector("#email");
@@ -34,28 +49,25 @@ if (loginForm) {
   const passwordError = document.querySelector("#passwordError");
   const formMessage = document.querySelector("#formMessage");
 
-  function setMessage(message) {
-    if (formMessage) {
-      formMessage.textContent = message;
-    }
-  }
-
   function clearLoginErrors() {
-    emailError.textContent = "";
-    passwordError.textContent = "";
-    formMessage.textContent = "";
+    setFieldError(emailError, "");
+    setFieldError(passwordError, "");
+    setFormMessage(formMessage, "");
   }
 
   function validateLoginForm(email, password) {
     let isValid = true;
 
-    if (!email.trim()) {
-      emailError.textContent = "Email is required.";
+    if (!email) {
+      setFieldError(emailError, "Email is required.");
+      isValid = false;
+    } else if (!isValidEmail(email)) {
+      setFieldError(emailError, "Please enter a valid email.");
       isValid = false;
     }
 
-    if (!password.trim()) {
-      passwordError.textContent = "Password is required.";
+    if (!password) {
+      setFieldError(passwordError, "Password is required.");
       isValid = false;
     }
 
@@ -66,15 +78,15 @@ if (loginForm) {
     event.preventDefault();
     clearLoginErrors();
 
-    const email = emailInput.value.trim();
-    const password = passwordInput.value.trim();
+    const email = emailInput?.value.trim() || "";
+    const password = passwordInput?.value.trim() || "";
 
     if (!validateLoginForm(email, password)) {
       return;
     }
 
     try {
-      formMessage.textContent = "Logging in...";
+      setFormMessage(formMessage, "Logging in...");
 
       const result = await sendRequest(API_LOGIN_URL, {
         email,
@@ -85,18 +97,18 @@ if (loginForm) {
       localStorage.setItem("userName", result.data.name);
       localStorage.setItem("userEmail", result.data.email);
 
-      formMessage.textContent = "Login succsessful.";
+      setFormMessage(formMessage, "Login successful.");
 
       setTimeout(() => {
         window.location.href = "../index.html";
       }, 1000);
     } catch (error) {
-      formMessage.textContent = error.message;
+      setFormMessage(formMessage, error.message);
     }
   });
 }
 
-// this is the register function for register.html
+// Registerform for register.html
 
 if (registerForm) {
   const nameInput = document.querySelector("#name");
@@ -111,38 +123,42 @@ if (registerForm) {
   const formMessage = document.querySelector("#formMessage");
 
   function clearRegisterErrors() {
-    nameError.textContent = "";
-    emailError.textContent = "";
-    passwordError.textContent = "";
-    passwordConfirmError.textContent = "";
-    formMessage.textContent = "";
+    setFieldError(nameError, "");
+    setFieldError(emailError, "");
+    setFieldError(passwordError, "");
+    setFieldError(passwordConfirmError, "");
+    setFormMessage(formMessage, "");
   }
 
   function validateRegisterForm(name, email, password, passwordConfirm) {
     let isValid = true;
 
-    if (!name.trim()) {
-      nameError.textContent = "Name is Required.";
+    if (!name) {
+      setFieldError(nameError, "Name is required.");
       isValid = false;
     }
 
-    if (!email.trim()) {
-      emailError.textContent = "Email is Required.";
+    if (!email) {
+      setFieldError(emailError, "Email is required.");
+      isValid = false;
+    } else if (!isValidEmail(email)) {
+      setFieldError(emailError, "Please enter a valid email.");
       isValid = false;
     }
 
-    if (!password.trim()) {
-      passwordError.textContent = "Password is Requierd.!";
+    if (!password) {
+      setFieldError(passwordError, "Password is required.");
+      isValid = false;
+    } else if (password.length < 8) {
+      setFieldError(passwordError, "Password must be at least 8 characters.");
       isValid = false;
     }
 
-    if (password.trim().length < 8) {
-      passwordError.textContent = "Password must be at least 8 characters.";
+    if (!passwordConfirm) {
+      setFieldError(passwordConfirmError, "Please confirm your password.");
       isValid = false;
-    }
-
-    if (password !== passwordConfirm) {
-      passwordConfirmError.textContent = "passwords do not match.";
+    } else if (password !== passwordConfirm) {
+      setFieldError(passwordConfirmError, "Passwords do not match.");
       isValid = false;
     }
 
@@ -153,17 +169,17 @@ if (registerForm) {
     event.preventDefault();
     clearRegisterErrors();
 
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-    const password = passwordInput.value.trim();
-    const passwordConfirm = passwordConfirmInput.value.trim();
+    const name = nameInput?.value.trim() || "";
+    const email = emailInput?.value.trim() || "";
+    const password = passwordInput?.value.trim() || "";
+    const passwordConfirm = passwordConfirmInput?.value.trim() || "";
 
     if (!validateRegisterForm(name, email, password, passwordConfirm)) {
       return;
     }
 
     try {
-      formMessage.textContent = "Registering...";
+      setFormMessage(formMessage, "Registering...");
 
       await sendRequest(API_REGISTER_URL, {
         name,
@@ -171,13 +187,13 @@ if (registerForm) {
         password,
       });
 
-      formMessage.textContent = "Registration successful.";
+      setFormMessage(formMessage, "Registration successful.");
 
       setTimeout(() => {
         window.location.href = "./login.html";
       }, 1000);
     } catch (error) {
-      formMessage.textContent = error.message;
+      setFormMessage(formMessage, error.message);
     }
   });
 }
