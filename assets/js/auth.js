@@ -93,4 +93,75 @@ if (loginForm) {
 if (registerForm) {
     const nameInput = document.querySelector("#name");
     const emailInput = document.querySelector("#email");
-    
+    const passwordInput = document.querySelector("#password");
+
+    const nameError = document.querySelector("#nameError");
+    const emailError = document.querySelector("#emailError");
+    const passwordError = document.querySelector("#passwordError");
+    const formMessage = document.querySelector("#formMessage");
+
+    function clearRegisterErrors() {
+        nameError.textContent = "";
+        emailError.textContent = "";
+        passwordError.textContent = "";
+        formMessage.textContent = "";
+    }
+
+    function validateRegisterForm(name, email, password) {
+        let isValid = true;
+
+        if (!name.trim()) {
+            nameError.textContent = "Name is required.";
+            isValid = false;
+        }
+
+        if (!email.trim()) {
+            emailError.textContent = "Email is required.";
+            isValid = false;
+        }
+
+        if (!password.trim()) {
+            passwordError.textContent = "Password is Requierd.!";
+            isValid = false;
+        }
+
+        if password.trim().length < 8 {
+            passwordError.textContent = "Password must be at least 8 characters.";
+            isValid = false;
+        }
+
+        return isValid; 
+    }
+
+     registerForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        clearRegisterErrors();
+
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        if (!validateRegisterForm(name, email, password)) {
+            return;
+        }
+
+        try {
+            formMessage.textContent = "Registering...";
+
+            await sendRequest(API_REGISTER_URL, {
+                name,
+                email,
+                password,
+            });
+
+            formMessage.textContent = "Registration successful.";
+
+            setTimeout(() => {
+                window.location.href = "./login.html";
+            }, 1000);
+        } catch (error) {
+            formMessage.textContent = error.message;
+        }
+    });
+}
+
