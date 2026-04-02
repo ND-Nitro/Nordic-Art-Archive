@@ -67,6 +67,21 @@
           </div>
           <p id="formMessage" class="form-message"></p>
 
+          <div class="form-group">
+            <label for="passwordConfirm" class="form-label">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              id="passwordConfirm"
+              name="passwordConfirm"
+              class="form-input"
+              placeholder="Repeat your password"
+              required
+            />
+            <p class="form-error" id="passwordConfirmError"></p>
+          </div>
+
           <button type="submit" class="btn btn-primary auth-submit">
             Register
           </button>
