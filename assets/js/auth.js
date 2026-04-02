@@ -28,3 +28,69 @@ async function sendRequest(url, bodyData) {
 if (loginForm) {
     const emailInput = document.querySelector("#email");
     const passwordInput = document.querySelector("#password");
+    const emailError = document.querySelector("#emailError");
+    const passwordError = document.querySelector("#passwordError");
+    const formMessage = document.querySelector("#formMessage");
+
+    function clearLoginErrors() {
+        emailError.textContent = "";
+        passwordError.textContent = "";
+        formMessage.textContent = "";
+    }
+
+    function validateLoginForm(email, password) {
+        let isValid = true;
+
+        if (!email.trim()) {
+            passwordError.textContent = "Email is required.";
+            isValid = false;
+        } 
+
+        if (!password.trim()) {
+            passwordError.textContent = "Password is required.";
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        clearLoginErrors();
+
+        const email = emailInput.ariaValueMax.trim();
+        const password = passwordInput.value.trim();
+
+        if (!validateLoginForm(email, password)) {
+            return;
+        }
+
+        try {
+            formMessage.textContent = "Logging in...";
+
+            const result = await sendRequest(API_LOGIN_URL, {
+                email,
+                password,
+            });
+
+            localStorage.setItem("accessToken", result.data.accessToken);
+            localStorage.setItem("userName", result.data.name);
+            localStorage.setItem("userEmail", result.data.email);
+
+            formMessage.textContent = "Login succsessful.";
+
+            setTimeout(() => {
+                windiow.location.href = "../index.html";
+            }, 1000);
+        } catch (error) {
+            formMessage.textContent = error.message;
+        }
+    });
+}
+
+// this is the register function for register.html
+
+if (registerForm) {
+    const nameInput = document.querySelector("#name");
+    const emailInput = document.querySelector("#email");
+    
