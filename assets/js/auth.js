@@ -1,9 +1,11 @@
 // here is the api collector ,, that will  fetch / get the corrwect api i need for login and register
+import { API_BASE_URL } from "./api/config.js";
+
 const loginForm = document.querySelector("#loginform");
 const registerForm = document.querySelector("#registerform");
 
-const API_LOGIN_URL = "https://v2.api.noroff.dev/auth/login";
-const API_REGISTER_URL = "https://v2.api.noroff.dev/auth/register";
+const API_LOGIN_URL = `${API_BASE_URL}/auth/login`;
+const API_REGISTER_URL = `${API_BASE_URL}/auth/register`;
 
 async function sendRequest(url, bodyData) {
   const response = await fetch(url, {
