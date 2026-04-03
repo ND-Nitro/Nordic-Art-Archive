@@ -29,4 +29,17 @@ form.addEventListener("submit", async (e) => {
       alt: imageAlt,
     },
   };
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(postData),
+    });
+    message.textContent = "Artwork created successfully!";
+  } catch (error) {
+    message.textContent = "Error creating artwork. Please try again.";
+  }
 });
