@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Post</title>
+    <link rel="stylesheet" href="create.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Create Artwork</h1>
+
+      <form id="createPostForm">
+        <div>
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" required />
+        </div>
+        <div>
+          <label for="artist">Artist</label>
+          <input type="text" id="artist" name="artist" required />
+        </div>
+
+        <div>
+          <label for="year">Year</label>
+          <input type="number" id="year" name="year" required />
+        </div>
+
+        <div>
+          <label for="medium">Medium</label>
+          <input type="text" id="medium" name="medium" required />
+        </div>
+
+        <div>
+          <label for="description">Description</label>
+          <textarea id="description" name="description" required></textarea>
+        </div>
+
+        <div>
+          <label for="location">Location</label>
+          <input type="text" id="location" name="location" required />
+        </div>
+        <div>
+          <label for="imageUrl">Image URL</label>
+          <input type="url" id="imageUrl" name="imageUrl" required />
+        </div>
+
+        <div>
+          <label for="imageAlt">Image alt text</label>
+          <input type="text" id="imageAlt" name="imageAlt" />
+        </div>
+        <button type="submit">Create Post</button>
+      </form>
+
+      <p id="message"></p>
+    </main>
+
+    <script src="#"></script>
+  </body>
+</html>
