@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create Post</title>
-    <link rel="stylesheet" href="create.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
+    <header id="navbar"></header>
     <main class="container">
       <h1>Create Artwork</h1>
 
@@ -48,12 +49,15 @@
           <label for="imageAlt">Image alt text</label>
           <input type="text" id="imageAlt" name="imageAlt" />
         </div>
-        <button type="submit">Create Post</button>
+        <button type="submit" class="btn btn-primary auth-submit">
+          Create Post
+        </button>
       </form>
 
       <p id="message"></p>
     </main>
 
-    <script src="#"></script>
+    <script type="module" src="./assets/js/create.js"></script>
+    <script type="module" src="./assets/js/components/navbar.js"></script>
   </body>
 </html>

@@ -1,0 +1,12 @@
+#createPostForm {
+  width: 100%;
+}
+
+#createPostForm textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+#createPostForm button {
+  margin-top: 0.5rem;
+}

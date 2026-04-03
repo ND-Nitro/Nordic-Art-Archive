@@ -93,9 +93,11 @@ if (loginForm) {
         password,
       });
 
-      localStorage.setItem("accessToken", result.data.accessToken);
-      localStorage.setItem("userName", result.data.name);
-      localStorage.setItem("userEmail", result.data.email);
+      console.log("Login result:", result);
+
+      localStorage.setItem("accessToken", result.accessToken);
+      localStorage.setItem("userName", result.name);
+      localStorage.setItem("userEmail", result.email);
 
       setFormMessage(formMessage, "Login successful.");
 
