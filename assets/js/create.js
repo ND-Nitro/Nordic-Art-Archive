@@ -38,8 +38,23 @@ form.addEventListener("submit", async (e) => {
       },
       body: JSON.stringify(postData),
     });
-    message.textContent = "Artwork created successfully!";
+
+    if (!response.ok) {
+      throw new Error("Error:${resposne.status}");
+    }
+
+    const result = await response.json();
+
+    message.textContent = "post created successfully!";
+    message.style.color = "green";
+
+    console.log("API response:", result);
+
+    form.reset();
   } catch (error) {
-    message.textContent = "Error creating artwork. Please try again.";
+    message.textContent = "Failed to create post. Please try again.";
+    message.style.color = "red";
+
+    console.error("error:", error);
   }
 });
