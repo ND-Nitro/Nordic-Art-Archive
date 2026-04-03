@@ -2,7 +2,7 @@ import { baseURL } from "./config.js";
 
 const form = document.querySelector("#createPostForm");
 const message = document.querySelector("#message");
-
+const token = localStorage.getItem("accessToken");
 const API_URL = `${baseURL}/artworks`;
 
 form.addEventListener("submit", async (e) => {
@@ -35,6 +35,7 @@ form.addEventListener("submit", async (e) => {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(postData),
     });
