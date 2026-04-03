@@ -1,0 +1,11 @@
+.form-error {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #b42318;
+}
+
+.form-message {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+}

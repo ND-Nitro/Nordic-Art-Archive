@@ -1,0 +1,73 @@
+.artwork-detail {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.artwork-breadcrumb {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.artwork-title {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.artwork-layout {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.artwork-image-box {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.artwork-image {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.artwork-info {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.artwork-meta {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+}
+
+.artwork-meta p {
+  margin: 0;
+}
+
+.owner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.artwork-description {
+  padding: 1rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+}
+
+.artwork-description h2 {
+  margin-top: 0;
+}
+
+@media (min-width: 900px) {
+  .artwork-layout {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: start;
+  }
+}

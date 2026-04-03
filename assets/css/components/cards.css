@@ -1,0 +1,35 @@
+.art-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.art-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.art-card-image {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background-color: var(--color-surface);
+}
+
+.art-card-content {
+  padding: 1rem;
+}
+
+.art-card-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+}
+
+.art-card-artist,
+.art-card-year {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
