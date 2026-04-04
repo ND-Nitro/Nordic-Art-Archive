@@ -4,36 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Artwork | Nordic Art Archive</title>
-    <link rel="stylesheet" href="../assets/css/variables.css" />
+    <link rel="stylesheet" href="../assets/css/base/variables.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
   </head>
   <body>
     <header id="navbar"></header>
 
     <main class="site-main">
-      <section class="container artwork-detail">
+      <section class="container artwork-detail" id="artworkDetail">
         <p class="artwork-breadcrumb">
           <a href="../index.html">Home</a> / <span>Artwork</span>
         </p>
 
-        <h1 class="artwork-title">Sunny Smile Family</h1>
+        <h1 class="artwork-title" id="artworkTitle">Loading...</h1>
 
         <div class="artwork-layout">
           <div class="artwork-image-box">
-            <img
-              src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=900&q=80"
-              alt="Sunny Smile Family artwork"
-              class="artwork-image"
-            />
+            <img id="artworkImage" src="" alt="" class="artwork-image" />
           </div>
 
           <div class="artwork-info">
-            <div class="artwork-meta">
-              <p><strong>Artist:</strong> Kjerte Amundsen</p>
-              <p><strong>Year:</strong> 2024</p>
-              <p><strong>Medium:</strong> Digital</p>
-              <p><strong>Location:</strong> Oslo</p>
-            </div>
+            <div class="artwork-meta" id="artworkMeta"></div>
 
             <div
               class="owner-actions hidden"
@@ -46,12 +37,7 @@
 
             <section class="artwork-description">
               <h2>Description</h2>
-              <p>
-                This artwork explores a warm and expressive family moment
-                through soft digital painting. The goal is to create a calm
-                Nordic mood while still keeping the image personal and
-                emotional.
-              </p>
+              <p id="artworkDescription">Loading description...</p>
             </section>
           </div>
         </div>
@@ -69,8 +55,8 @@
 
         <div class="footer-column">
           <h2 class="footer-title">Contact</h2>
-          <p class="footer-text">Email:letsmakethiswork@gamil.com</p>
-          <p class="footer-text">Adress: Oslo, norway</p>
+          <p class="footer-text">Email: letsmakethiswork@gamil.com</p>
+          <p class="footer-text">Address: Oslo, Norway</p>
           <p class="footer-text">Phone: 64929023</p>
         </div>
       </div>
@@ -78,7 +64,7 @@
       <p class="footer-bottom">© 2026 Nordic Art Archive | Steffen Heltne</p>
     </footer>
 
-    <script src="../assets/js/artwork.js"></script>
-    <script type="module" src="./assets/js/components/navbar.js"></script>
+    <script type="module" src="../assets/js/components/navbar.js"></script>
+    <script type="module" src="../assets/js/artwork.js"></script>
   </body>
 </html>
