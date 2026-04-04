@@ -7,7 +7,7 @@ function createNavbar() {
 
   const authButtons = loggedIn
     ? `
-    <a href="/create.html" class="btn btn-primary">
+    <a href="./create.html" class="btn btn-primary">
     Create
     </a>
 
@@ -16,23 +16,23 @@ function createNavbar() {
       </button>
     `
     : `
-      <a href="/account/login.html" class="btn btn-secondary">
+      <a href="./account/login.html" class="btn btn-secondary">
         Login
       </a>
-      <a href="/account/register.html" class="btn btn-primary">
+      <a href="./account/register.html" class="btn btn-primary">
         Register
       </a>
     `;
 
   return `
     <div class="container header-wrapper">
-      <a href="/index.html" class="logo">
+      <a href="./index.html" class="logo">
         Nordic Art Archive
       </a>
 
       <nav class="site-nav" aria-label="Main navigation">
-        <a href="/index.html" class="nav-link">Home</a>
-        <a href="/artwork.html" class="nav-link">Artwork</a>
+        <a href="./index.html" class="nav-link">Home</a>
+        <a href="./artwork.html" class="nav-link">Artwork</a>
         <a href="#" class="nav-link">About</a>
       </nav>
 
@@ -62,7 +62,7 @@ function renderNavbar() {
 function handleLogout() {
   localStorage.removeItem("accessToken");
 
-  window.location.href = "/index.html";
+  window.location.href = "./index.html";
 }
 
 renderNavbar();
