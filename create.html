@@ -3,61 +3,134 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Post</title>
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Create Artwork</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css" />
   </head>
   <body>
     <header id="navbar"></header>
-    <main class="container">
-      <h1>Create Artwork</h1>
 
-      <form id="createPostForm">
-        <div>
-          <label for="title">Title</label>
-          <input type="text" id="title" name="title" required />
-        </div>
-        <div>
-          <label for="artist">Artist</label>
-          <input type="text" id="artist" name="artist" required />
-        </div>
+    <main class="site-main">
+      <section class="container auth-section">
+        <form class="auth-card create-form" id="createPostForm">
+          <h1 class="auth-title">Create Artwork</h1>
 
-        <div>
-          <label for="year">Year</label>
-          <input type="number" id="year" name="year" required />
-        </div>
+          <div class="form-group">
+            <label for="title" class="form-label">Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              class="form-input"
+              required
+            />
+          </div>
 
-        <div>
-          <label for="medium">Medium</label>
-          <input type="text" id="medium" name="medium" required />
-        </div>
+          <div class="form-group">
+            <label for="artist" class="form-label">Artist</label>
+            <input
+              type="text"
+              id="artist"
+              name="artist"
+              class="form-input"
+              required
+            />
+          </div>
 
-        <div>
-          <label for="description">Description</label>
-          <textarea id="description" name="description" required></textarea>
-        </div>
+          <div class="form-group">
+            <label for="year" class="form-label">Year</label>
+            <input
+              type="number"
+              id="year"
+              name="year"
+              class="form-input"
+              required
+            />
+          </div>
 
-        <div>
-          <label for="location">Location</label>
-          <input type="text" id="location" name="location" required />
-        </div>
-        <div>
-          <label for="imageUrl">Image URL</label>
-          <input type="url" id="imageUrl" name="imageUrl" required />
-        </div>
+          <div class="form-group">
+            <label for="medium" class="form-label">Medium</label>
+            <input
+              type="text"
+              id="medium"
+              name="medium"
+              class="form-input"
+              required
+            />
+          </div>
 
-        <div>
-          <label for="imageAlt">Image alt text</label>
-          <input type="text" id="imageAlt" name="imageAlt" />
-        </div>
-        <button type="submit" class="btn btn-primary auth-submit">
-          Create Post
-        </button>
-      </form>
+          <div class="form-group">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              class="form-input"
+              required
+            ></textarea>
+          </div>
 
-      <p id="message"></p>
+          <div class="form-group">
+            <label for="location" class="form-label">Location</label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              class="form-input"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="imageUrl" class="form-label">Image URL</label>
+            <input
+              type="url"
+              id="imageUrl"
+              name="imageUrl"
+              class="form-input"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="imageAlt" class="form-label">Image alt text</label>
+            <input
+              type="text"
+              id="imageAlt"
+              name="imageAlt"
+              class="form-input"
+            />
+          </div>
+
+          <p id="message" class="form-message"></p>
+
+          <button type="submit" class="btn btn-primary auth-submit">
+            Create Post
+          </button>
+        </form>
+      </section>
     </main>
 
-    <script type="module" src="./assets/js/create.js"></script>
-    <script type="module" src="./assets/js/components/navbar.js"></script>
+    <footer class="site-footer">
+      <div class="container footer-wrapper">
+        <div class="footer-column">
+          <h2 class="footer-title">Navigation</h2>
+          <a href="../index.html" class="footer-link">Home</a>
+          <a href="../about.html" class="footer-link">About us</a>
+          <a href="#" class="footer-link">Terms of service</a>
+        </div>
+
+        <div class="footer-column">
+          <h2 class="footer-title">Contact</h2>
+          <p class="footer-text">Email: letsmakethiswork@gamil.com</p>
+          <p class="footer-text">Address: Oslo, Norway</p>
+          <p class="footer-text">Phone: 64929023</p>
+        </div>
+      </div>
+
+      <p class="footer-bottom">© 2026 Nordic Art Archive | Steffen Heltne</p>
+    </footer>
+
+    <script type="module" src="../assets/js/components/navbar.js"></script>
+    <script type="module" src="../assets/js/create.js"></script>
   </body>
 </html>
