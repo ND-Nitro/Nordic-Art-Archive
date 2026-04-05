@@ -1,71 +1,102 @@
 .hero-container {
-  max-width: 900px;
+  width: 100%;
+  max-width: 720px;
   margin: 0 auto;
-  padding: 4rem 1.5rem 2rem;
+  padding: 2rem 1rem 1.5rem;
 }
 
 .page-title {
-  font-size: 3rem;
+  font-size: 2.25rem;
   line-height: 1.1;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--color-text-primary);
 }
 
 .page-lead {
-  max-width: 720px;
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: #2f3b45;
+  max-width: 60ch;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-text-secondary);
 }
 
 .about-highlight {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  align-items: center;
-  padding: 2rem 1.5rem 4rem;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 1rem 2rem;
+}
+
+.about-highlight-image {
+  width: 100%;
+  max-width: 360px;
 }
 
 .about-highlight-image img {
   width: 100%;
-  height: 420px;
+  height: 260px;
   object-fit: cover;
-  border-radius: 18px;
+  border-radius: 16px;
   display: block;
 }
 
 .about-values {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  padding: 0 1.5rem 4rem;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 0 1rem 3rem;
 }
 
 .value-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 18px;
-  padding: 1.5rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 1.25rem;
 }
 
 .value-card h3 {
   margin-bottom: 0.75rem;
+  color: var(--color-text-primary);
 }
 
 .value-card p {
-  color: #4b5a65;
+  color: var(--color-text-secondary);
   line-height: 1.7;
 }
 
-@media (max-width: 900px) {
-  .about-highlight {
-    grid-template-columns: 1fr;
+@media (min-width: 768px) {
+  .hero-container {
+    max-width: 840px;
+    padding: 3rem 1.5rem 2rem;
   }
 
-  .about-values {
-    grid-template-columns: 1fr;
+  .page-title {
+    font-size: 3rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .page-lead {
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  .about-highlight {
+    padding: 1rem 1.5rem 2.5rem;
+  }
+
+  .about-highlight-image {
+    max-width: 420px;
   }
 
   .about-highlight-image img {
-    height: 300px;
+    height: 320px;
+  }
+
+  .about-values {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 0 1.5rem 4rem;
+  }
+
+  .value-card {
+    padding: 1.5rem;
   }
 }

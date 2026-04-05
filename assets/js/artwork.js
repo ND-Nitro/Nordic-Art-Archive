@@ -8,6 +8,7 @@ const metaElement = document.querySelector("#artworkMeta");
 const descriptionElement = document.querySelector("#artworkDescription");
 const ownerActions = document.querySelector("#ownerActions");
 const editButton = document.querySelector("#editButton");
+const deleteButton = document.querySelector("#deleteBtn");
 
 function getArtworkIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
@@ -90,6 +91,68 @@ async function fetchArtwork() {
     console.error("Error fetching artwork:", error);
     renderError("Could not load artwork.");
   }
+}
+
+async function handleDelete() {
+  const artworkId = getArtworkIdFromUrl();
+
+  if (!artworkId) {
+    alert("Missing artwork id.");
+    return;
+  }
+
+  const token = localStorage.getItem("accessToken");
+  const apiKey = localStorage.getItem("apiKey");
+
+  if (!token) {
+    alert("You must be logged in to delete an artwork.");
+    return;
+  }
+
+  if (!apiKey) {
+    alert("Missing API key.");
+    return;
+  }
+
+  const confirmed = window.confirm(
+    "Are you sure you want to delete this artwork?",
+  );
+
+  if (!confirmed) return;
+
+  try {
+    const response = await fetch(`${ARTWORKS_URL}/${artworkId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "X-Noroff-API-Key": apiKey,
+      },
+    });
+
+    if (!response.ok) {
+      let errorMessage = "Failed to delete artwork.";
+
+      try {
+        const result = await response.json();
+        errorMessage =
+          result.errors?.[0]?.message || `Error: ${response.status}`;
+      } catch {
+        errorMessage = `Error: ${response.status}`;
+      }
+
+      throw new Error(errorMessage);
+    }
+
+    alert("Artwork deleted successfully.");
+    window.location.href = "./index.html";
+  } catch (error) {
+    console.error("Error deleting artwork:", error);
+    alert(error.message);
+  }
+}
+
+if (deleteButton) {
+  deleteButton.addEventListener("click", handleDelete);
 }
 
 showOwnerActions();
