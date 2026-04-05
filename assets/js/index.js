@@ -6,7 +6,9 @@ const artGrid = document.querySelector("#artGrid");
 function createArtworkCard(artwork) {
   const imageUrl =
     artwork.image?.url || "https://via.placeholder.com/600x600?text=No+Image";
+
   const imageAlt = artwork.image?.alt || artwork.title || "Artwork preview";
+
   const title = artwork.title || "Untitled";
   const artist = artwork.artist || "Unknown artist";
   const year = artwork.year || "Unknown year";
@@ -34,14 +36,18 @@ async function fetchArtworks() {
 
     const result = await response.json();
 
-    const artworks = result.data;
+    const artworks = result.data.filter(
+      (artwork) => artwork.owner?.name === "ndnitro",
+    );
 
     artGrid.innerHTML = artworks.map(createArtworkCard).join("");
   } catch (error) {
     console.error("Error fetching artworks:", error);
 
     artGrid.innerHTML = `
-      <p class="form-message">Failed to load artworks.</p>
+      <p class="form-message">
+        Failed to load artworks.
+      </p>
     `;
   }
 }

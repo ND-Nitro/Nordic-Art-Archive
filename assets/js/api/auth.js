@@ -5,16 +5,22 @@ const registerForm = document.querySelector("#registerform");
 
 const API_LOGIN_URL = `${API_BASE_URL}/auth/login`;
 const API_REGISTER_URL = `${API_BASE_URL}/auth/register`;
+const API_KEY_URL = `${API_BASE_URL}/auth/create-api-key`;
 
-async function sendRequest(url, bodyData) {
-  const response = await fetch(url, {
-    method: "POST",
+async function sendRequest(url, bodyData, options = {}) {
+  const fetchOptions = {
+    method: options.method || "POST",
     headers: {
       "Content-Type": "application/json",
+      ...(options.headers || {}),
     },
-    body: JSON.stringify(bodyData),
-  });
+  };
 
+  if (bodyData !== undefined) {
+    fetchOptions.body = JSON.stringify(bodyData);
+  }
+
+  const response = await fetch(url, fetchOptions);
   const result = await response.json();
 
   if (!response.ok) {
@@ -22,6 +28,48 @@ async function sendRequest(url, bodyData) {
   }
 
   return result;
+}
+
+async function createApiKey(accessToken) {
+  const result = await sendRequest(
+    API_KEY_URL,
+    { name: "Nordic Art Archive" },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    },
+  );
+
+  return result.data?.key;
+}
+
+async function loginAndStoreUser(email, password) {
+  const loginResult = await sendRequest(API_LOGIN_URL, {
+    email,
+    password,
+  });
+
+  console.log("Login result:", loginResult);
+
+  const accessToken = loginResult.data?.accessToken || loginResult.accessToken;
+  const userName = loginResult.data?.name || loginResult.name;
+  const userEmail = loginResult.data?.email || loginResult.email;
+
+  if (!accessToken) {
+    throw new Error("Login succeeded, but no access token was returned.");
+  }
+
+  const apiKey = await createApiKey(accessToken);
+
+  if (!apiKey) {
+    throw new Error("API key was not returned.");
+  }
+
+  localStorage.setItem("accessToken", accessToken);
+  localStorage.setItem("userName", userName || "");
+  localStorage.setItem("userEmail", userEmail || "");
+  localStorage.setItem("apiKey", apiKey);
 }
 
 function setFieldError(element, message) {
@@ -40,8 +88,7 @@ function isValidEmail(email) {
   return email.includes("@");
 }
 
-// Loginform for login.html
-
+// Login form for login.html
 if (loginForm) {
   const emailInput = document.querySelector("#email");
   const passwordInput = document.querySelector("#password");
@@ -88,16 +135,7 @@ if (loginForm) {
     try {
       setFormMessage(formMessage, "Logging in...");
 
-      const result = await sendRequest(API_LOGIN_URL, {
-        email,
-        password,
-      });
-
-      console.log("Login result:", result);
-
-      localStorage.setItem("accessToken", result.accessToken);
-      localStorage.setItem("userName", result.name);
-      localStorage.setItem("userEmail", result.email);
+      await loginAndStoreUser(email, password);
 
       setFormMessage(formMessage, "Login successful.");
 
@@ -106,12 +144,12 @@ if (loginForm) {
       }, 1000);
     } catch (error) {
       setFormMessage(formMessage, error.message);
+      console.error("Login error:", error);
     }
   });
 }
 
-// Registerform for register.html
-
+// Register form for register.html
 if (registerForm) {
   const nameInput = document.querySelector("#name");
   const emailInput = document.querySelector("#email");
@@ -189,13 +227,18 @@ if (registerForm) {
         password,
       });
 
-      setFormMessage(formMessage, "Registration successful.");
+      setFormMessage(formMessage, "Registration successful. Logging you in...");
+
+      await loginAndStoreUser(email, password);
+
+      setFormMessage(formMessage, "Account created and login successful.");
 
       setTimeout(() => {
-        window.location.href = "./login.html";
+        window.location.href = "../index.html";
       }, 1000);
     } catch (error) {
       setFormMessage(formMessage, error.message);
+      console.error("Register error:", error);
     }
   });
 }
