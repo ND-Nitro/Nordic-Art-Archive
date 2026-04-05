@@ -7,6 +7,7 @@ const imageElement = document.querySelector("#artworkImage");
 const metaElement = document.querySelector("#artworkMeta");
 const descriptionElement = document.querySelector("#artworkDescription");
 const ownerActions = document.querySelector("#ownerActions");
+const editButton = document.querySelector("#editButton");
 
 function getArtworkIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
@@ -52,6 +53,10 @@ function renderArtwork(artwork) {
   `;
 
   descriptionElement.textContent = description;
+
+  if (editButton && artwork.id) {
+    editButton.href = `./edit.html?id=${artwork.id}`;
+  }
 }
 
 function renderError(message) {

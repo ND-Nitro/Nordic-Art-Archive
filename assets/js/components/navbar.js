@@ -32,8 +32,7 @@ function createNavbar() {
 
       <nav class="site-nav" aria-label="Main navigation">
         <a href="./index.html" class="nav-link">Home</a>
-        <a href="./artwork.html" class="nav-link">Artwork</a>
-        <a href="#" class="nav-link">About</a>
+        <a href="./about.html" class="nav-link">About</a>
       </nav>
 
       <div class="header-actions">

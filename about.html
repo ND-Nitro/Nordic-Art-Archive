@@ -8,23 +8,7 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
-    <header class="site-header">
-      <div class="container header-wrapper">
-        <a href="./index.html" class="logo">Nordic Art Archive</a>
-        <!--Navbar with the nessesery buttons for an small site + an about page that will be added -->
-        <nav class="site-nav" aria-label="Main navigation">
-          <a href="./index.html" class="nav-link">Home</a>
-          <a href="./artwork.html" class="nav-link">Artwork</a>
-          <a href="#" class="nav-link">About</a>
-        </nav>
-
-        <div class="header-action">
-          <a href="./account/login.html" class="btn btn-secondary">Login</a>
-          <a href="./account/register.html" class="btn btn-primary">Register</a>
-          <button>Logout</button>
-        </div>
-      </div>
-    </header>
+    <header id="navbar"></header>
     <main class="site-main">
       <section class="hero-container">
         <h1 class="page-title">About us in nordic</h1>
@@ -57,6 +41,7 @@
 
       <p class="footer-bottom">© 2026 Nordic Art Archive | Steffen Heltne</p>
     </footer>
-    <script type="module" src="index.js"></script>
+    <script type="module" src="./assets/js/index.js"></script>
+    <script type="module" src="./assets/js/components/navbar.js"></script>
   </body>
 </html>
